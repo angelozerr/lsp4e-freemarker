@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.eclipse.lsp4e-freemarker</groupId>
-  <artifactId>org.eclipse.lsp4e-freemarker.parent</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <groupId>org.eclipse.lsp4e.freemarker</groupId>
+  <artifactId>org.eclipse.lsp4e.freemarker.parent</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <organization>
@@ -21,8 +21,24 @@
   </licenses>
   <modules>
     <module>org.eclipse.lsp4e.freemarker</module>
+    <module>org.eclipse.lsp4e.freemarker.feature</module>
+    <module>repository</module>
+    <module>target-platform</module>
   </modules>
 
+  <repositories>
+    <repository>
+      <id>photon</id>
+      <layout>p2</layout>
+      <url>http://download.eclipse.org/eclipse/updates/4.8-I-builds</url>
+    </repository>
+    <repository>
+      <id>license-feature</id>
+      <url>http://download.eclipse.org/cbi/updates/license/</url>
+      <layout>p2</layout>
+    </repository>
+  </repositories>
+  
   <scm>
     <connection>scm:git:https://github.com/angelozerr/lsp4e-freemarker.git</connection>
     <developerConnection>scm:git:https://github.com/angelozerr/lsp4e-freemarker.git</developerConnection>
@@ -123,18 +139,29 @@
       </plugin>
     </plugins>
   </build>
-  <repositories>
-    <repository>
-      <id>cloudbees</id>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <url>http://repository-opensagres.forge.cloudbees.com/snapshot/</url>
-    </repository>
-  </repositories>
+
+<pluginRepositories>
+    <pluginRepository>
+      <id>cbi</id>
+      <url>https://repo.eclipse.org/content/groups/cbi</url>
+      <snapshots><enabled>true</enabled></snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>jboss</id>
+      <url>https://repository.jboss.org/</url>
+      <snapshots><enabled>true</enabled></snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>jboss-snapshots-repository</id>
+      <name>JBoss Snapshots Repository</name>
+      <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+  
   <name>Eclipse Plugin for Freemarker - Parent</name>
   <description>Integration of the Freemarker Language Server with LSP4E.</description>
 </project>

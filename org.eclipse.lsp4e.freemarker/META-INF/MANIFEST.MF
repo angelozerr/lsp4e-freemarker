@@ -6,8 +6,8 @@ Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.lsp4e.freemarker;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.eclipse.lsp4e;bundle-version="0.6.0",
- org.eclipse.core.runtime;bundle-version="3.13.0",
+Require-Bundle: org.eclipse.lsp4e,
+ org.eclipse.core.runtime,
  org.eclipse.ui.workbench
 Bundle-Activator: org.eclipse.lsp4e.freemarker.Activator
 Bundle-ActivationPolicy: lazy
