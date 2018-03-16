@@ -8,6 +8,11 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.lsp4e,
  org.eclipse.core.runtime,
- org.eclipse.ui.workbench
-Bundle-Activator: org.eclipse.lsp4e.freemarker.Activator
+ org.eclipse.ui.workbench,
+ org.eclipse.jface.text,
+ org.eclipse.swt,
+ org.eclipse.jface,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.ui.editors
+Bundle-Activator: org.eclipse.lsp4e.freemarker.FreemarkerPlugin
 Bundle-ActivationPolicy: lazy

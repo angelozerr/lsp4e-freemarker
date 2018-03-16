@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+<!-- <#list> template -->
+<template 
+  context="freemarkerTemplateContextType"
+  description="%listTemplate1.description"  
+  id="org.eclipse.lsp4e.freemarker.ui.templates.list"
+  name="list">&lt;#list ${sequence} as ${item}&gt;
+  ${line_selection}$${${item}${cursor}} 
+&lt;/#list&gt;</template>
+
+<!-- <#if> </#if> template -->
+<template 
+  context="freemarkerTemplateContextType"
+  description="%ifTemplate1.description"  
+  id="org.eclipse.lsp4e.freemarker.ui.templates.if"
+  name="if">&lt;#if ${condition} >
+  ${cursor}
+&lt;/#if&gt;</template>
+
+<!-- <#if> <#else> </#if> template -->
+<template 
+  context="freemarkerTemplateContextType"
+  description="%ifelseTemplate1.description"  
+  id="org.eclipse.lsp4e.freemarker.ui.templates.ifelse1"
+  name="ifelse">&lt;#if ${condition}&gt;
+  ${cursor}
+&lt;#else&gt;
+
+&lt;/#if&gt;</template>
+
+<!-- <#elseif> </#if> template -->
+<template 
+  context="freemarkerTemplateContextType"
+  description="%elsifTemplate1.description"  
+  id="org.eclipse.lsp4e.freemarker.ui.templates.elsif1"
+  name="elseif">&lt;#elseif ${condition} &gt;
+  ${cursor}
+&lt;/#if&gt;</template>
+
+<!-- <#assign> template -->
+<template 
+  context="freemarkerTemplateContextType"
+  description="%assignTemplate1.description"  
+  id="org.eclipse.lsp4e.freemarker.ui.templates.assign1"
+  name="assign">&lt;#assign ${name} = ${value} /&gt;</template>
+
+<!-- <#include > template - http://freemarker.sourceforge.net/docs/ref_directive_include.html -->
+<template 
+  context="freemarkerTemplateContextType"
+  description="%includeTemplate1.description"  
+  id="org.eclipse.lsp4e.freemarker.ui.templates.include1"
+  name="include">&lt;#include "${path}" &gt;</template>
+  
+<!-- $ template -->
+<template 
+  context="freemarkerTemplateContextType"
+  description="%exspressionTemplate1.description"  
+  id="org.eclipse.lsp4e.freemarker.ui.templates.expression1"
+  name="$">$${${line_selection}${cursor}}</template>
+  
+</templates>
