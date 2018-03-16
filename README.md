@@ -15,3 +15,8 @@ Demo
 Here a demo:
  
  ![Editor Config](screenshots/FreemarkerLSPDemo.gif)
+ 
+Build
+===========================
+
+See cloudbees job: https://opensagres.ci.cloudbees.com/job/lsp4e-freemarker/
