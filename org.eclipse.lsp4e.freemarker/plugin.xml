@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <!-- Freemarker Language -->   
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="ftl"
+            id="org.eclipse.lsp4e.freemarker"
+            name="Freemarker"
+            priority="normal">
+      </content-type>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors">
+      <editorContentTypeBinding
+            contentTypeId="org.eclipse.lsp4e.freemarker"
+            editorId="org.eclipse.ui.genericeditor.GenericEditor">
+      </editorContentTypeBinding>
+   </extension>
+      
+   <extension
+         point="org.eclipse.lsp4e.languageServer">
+      <server
+            class="org.eclipse.lsp4e.freemarker.FreemarkerLanguageServer"
+            id="org.eclipse.lsp4e.freemarker"
+            label="Freemarker Language Server" >
+      </server>
+      <contentTypeMapping
+            contentType="org.eclipse.lsp4e.freemarker"
+            id="org.eclipse.lsp4e.freemarker">
+      </contentTypeMapping>
+   </extension>
+   
+   <extension
+         point="org.eclipse.tm4e.registry.grammars">
+      <grammar
+            path="./syntaxes/ftl.tmLanguage"
+            scopeName="text.html.ftl">
+      </grammar>
+      <scopeNameContentTypeBinding
+            contentTypeId="org.eclipse.lsp4e.freemarker"
+            scopeName="text.html.ftl">
+      </scopeNameContentTypeBinding>
+   </extension>
+
+   <extension
+         point="org.eclipse.tm4e.languageconfiguration.languageConfigurations">
+      <languageConfiguration
+            contentTypeId="org.eclipse.lsp4e.freemarker"
+            path="language-configurations/language-configuration.json">
+      </languageConfiguration>
+   </extension>
+
+   <extension
+         point="org.eclipse.tm4e.ui.snippets">
+      <snippet
+            name="Freemarker Sample"
+            path="snippets/sample.ftl"
+            scopeName="text.html.ftl">
+      </snippet>
+   </extension>
+
+</plugin>
