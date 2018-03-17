@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/angelozerr/lsp4e_freemarker.png)](http://travis-ci.org/angelozerr/lsp4e-freemarker)
+[![Build Status](https://secure.travis-ci.org/angelozerr/lsp4e-freemarker.png)](http://travis-ci.org/angelozerr/lsp4e-freemarker)
 
 Eclipse Freemarker LSP
 ===========================
@@ -15,7 +15,6 @@ Demo
 Here a demo (with installed[Eclipse BlueSky](https://github.com/mickaelistria/eclipse-bluesky)):
  
  ![Editor Config](screenshots/FreemarkerLSPDemo.gif)
- 
  
 Installation
 ===========================
