@@ -12,6 +12,8 @@ The `LSP4e Freemarker` is a an Eclipse plugin for [Freemarker](https://freemarke
 Eclipse BlueSky
 ===========================
 
+Once https://github.com/mickaelistria/eclipse-bluesky/issues/63 will work in Photo you could install it.
+
 HTML syntax coloration (managed with TextMate) and HTML completion, mark occurrences, etc is not a part of this plugin. I suggest you that you install https://github.com/mickaelistria/eclipse-bluesky
 which provides those features.
 

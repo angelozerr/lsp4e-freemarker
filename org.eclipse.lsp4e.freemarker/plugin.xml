@@ -2,24 +2,20 @@
 <?eclipse version="3.4"?>
 <plugin>
 
-   <!-- Defines as low priority the "org.eclipse.bluesky.html" content type in case of Eclipse BlueSky is not installed
-        in order to "org.eclipse.lsp4e.freemarker" content type is valid -->
+   <!-- Remove that when Eclipse BlueSky will be available for Photon https://github.com/mickaelistria/eclipse-bluesky/issues/63 -->
    <extension
-         point="org.eclipse.core.contenttype.contentTypes">
-      <content-type
-            base-type="org.eclipse.core.runtime.text"
-            file-extensions="html"
-            id="org.eclipse.bluesky.html"
-            name="HTML (low)"
-            priority="low">
-      </content-type>
+         point="org.eclipse.tm4e.registry.grammars">
+      <grammar
+            path="syntaxes/html.json"
+            scopeName="text.html.basic">
+      </grammar>
    </extension>
    
    <!-- Freemarker Language -->   
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
-            base-type="org.eclipse.bluesky.html"
+            base-type="org.eclipse.core.runtime.text"
             file-extensions="ftl"
             id="org.eclipse.lsp4e.freemarker"
             name="FreeMarker"
