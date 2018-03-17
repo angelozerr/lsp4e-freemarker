@@ -1,44 +1,135 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>repository</artifactId>
-	<parent>
-  	<groupId>org.eclipse.lsp4e.freemarker</groupId>
-	  <version>1.0.0-SNAPSHOT</version>
-	  <artifactId>org.eclipse.lsp4e.freemarker.parent</artifactId>
-	</parent>
+  <parent>
+    <groupId>org.eclipse.lsp4e.freemarker</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>org.eclipse.lsp4e.freemarker.parent</artifactId>
+  </parent>
   <packaging>eclipse-repository</packaging>
-  
-	<build>
-		<plugins>
-			<!-- workaround https://bugs.eclipse.org/bugs/show_bug.cgi?id=453708 -->
-			<plugin>
-				<groupId>org.jboss.tools.tycho-plugins</groupId>
-				<artifactId>repository-utils</artifactId>
-				<version>0.26.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>generate-repository-facade</goal>
-						</goals>
-						<configuration>
-							<associateSites>
-								<associateSite>http://download.eclipse.org/lsp4e/snapshots</associateSite>
-								<associateSite>http://download.eclipse.org/tm4e/snapshots</associateSite>
-							</associateSites>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+  <scm>
+    <url>https://github.com/angelozerr/lsp4e-freemarker</url>
+    <connection>scm:git:https://github.com/angelozerr/lsp4e-freemarker.git</connection>
+    <developerConnection>scm:git:https://github.com/angelozerr/lsp4e-freemarker.git</developerConnection>
+  </scm>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>jboss-snapshots-repository</id>
-			<name>JBoss Snapshots Repository</name>
-			<url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
-			<uniqueVersion>false</uniqueVersion>
-		</snapshotRepository>
-	</distributionManagement>
+  <properties>
+    <url.suffix>snapshot</url.suffix>
+  </properties>
+
+  <build>
+    <extensions>
+      <!-- Enabling the use of FTP -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ftp</artifactId>
+        <version>2.8</version>
+      </extension>
+    </extensions>
+    <plugins>
+      <!-- workaround https://bugs.eclipse.org/bugs/show_bug.cgi?id=453708 -->
+      <plugin>
+        <groupId>org.jboss.tools.tycho-plugins</groupId>
+        <artifactId>repository-utils</artifactId>
+        <version>0.26.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>generate-repository-facade</goal>
+            </goals>
+            <configuration>
+              <associateSites>
+                <associateSite>http://download.eclipse.org/lsp4e/snapshots</associateSite>
+                <associateSite>http://download.eclipse.org/tm4e/snapshots</associateSite>
+              </associateSites>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>jboss-snapshots-repository</id>
+      <name>JBoss Snapshots Repository</name>
+      <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <profiles>
+    <!-- This profile is used to upload the repo -->
+    <profile>
+      <id>uploadRepo</id>
+      <properties>
+        <!-- Properties relative to the distant host where to upload the 
+          repo -->
+        <ftp.url>ftp://ftp.online.net</ftp.url>
+        <ftp.toDir>/oss/lsp4e-freemarker/${url.suffix}</ftp.toDir>
+        <!-- Relative path to the repo being uploaded -->
+        <repo.path>${project.build.directory}/repository/</repo.path>
+      </properties>
+      <build>
+        <plugins>
+          <!-- Upload the repo to the server -->
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>wagon-maven-plugin</artifactId>
+            <version>1.0</version>
+            <executions>
+              <execution>
+                <id>upload-repo</id>
+                <phase>install</phase>
+                <goals>
+                  <goal>upload</goal>
+                </goals>
+                <configuration>
+                  <fromDir>${repo.path}</fromDir>
+                  <includes>**</includes>
+                  <toDir>${ftp.toDir}</toDir>
+                  <url>${ftp.url}</url>
+                  <serverId>p2Repo</serverId>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>release</id>
+      <properties>
+        <url.suffix>stable</url.suffix>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>de.jutzig</groupId>
+            <artifactId>github-release-plugin</artifactId>
+            <version>1.1.1</version>
+            <executions>
+              <execution>
+                <id>github-upload</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>release</goal>
+                </goals>
+                <inherited>false</inherited>
+              </execution>
+            </executions>
+            <configuration>
+              <overwriteArtifact>true</overwriteArtifact>
+              <tag>${project.artifactId}-${project.version}</tag>
+              <releaseName>${project.artifactId}-${project.version}</releaseName>
+              <artifact>${project.build.directory}/${project.artifactId}-${project.version}.zip</artifact>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
