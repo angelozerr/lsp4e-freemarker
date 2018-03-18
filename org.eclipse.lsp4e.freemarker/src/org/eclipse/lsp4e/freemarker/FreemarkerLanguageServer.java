@@ -10,12 +10,18 @@
  */
 package org.eclipse.lsp4e.freemarker;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.lsp4e.server.ProcessStreamConnectionProvider;
 import org.osgi.framework.Bundle;
 
@@ -26,25 +32,46 @@ import org.osgi.framework.Bundle;
 public class FreemarkerLanguageServer extends ProcessStreamConnectionProvider {
 
 	public FreemarkerLanguageServer() {
+		super(computeCommands(), computeWorkingDir());
+	}
+
+	private static String computeWorkingDir() {
+		return System.getProperty("user.dir");
+	}
+
+	private static List<String> computeCommands() {
 		List<String> commands = new ArrayList<>();
 		commands.add("java");
 		commands.add("-jar");
-		commands.add("freemarker-languageserver-all.jar");
+		commands.add(computeFreemarkerLanguageServerJarPath());
+		return commands;
+	}
 
-		setCommands(commands);
-
-		Bundle bundle = FreemarkerPlugin.getDefault().getBundle();
-		Path workingDir = Path.EMPTY;
+	private static String computeFreemarkerLanguageServerJarPath() {
+		Bundle bundle = Platform.getBundle(FreemarkerPlugin.PLUGIN_ID);
+		URL fileURL = bundle.getEntry("server/freemarker-languageserver-all.jar");
 		try {
-			workingDir = new Path(FileLocator.toFileURL(FileLocator.find(bundle, new Path("server"), null)).getPath());
-			setWorkingDirectory(workingDir.toOSString());
-		} catch (IOException e) {
-			FreemarkerPlugin.log(e);
+			URL resolvedFileURL = FileLocator.toFileURL(fileURL);
+
+			// We need to use the 3-arg constructor of URI in order to properly escape file
+			// system chars
+			URI resolvedURI = new URI(resolvedFileURL.getProtocol(), resolvedFileURL.getPath(), null);
+			File file = new File(resolvedURI);
+			if (Platform.OS_WIN32.equals(Platform.getOS())) {
+				return "\"" + file.getAbsolutePath() + "\"";
+			} else {
+				return file.getAbsolutePath();
+			}
+		} catch (URISyntaxException | IOException exception) {
+			FreemarkerPlugin.log(new Status(IStatus.ERROR, FreemarkerPlugin.PLUGIN_ID,
+					"Cannot get the FreeMarker LSP Server jar.", exception)); //$NON-NLS-1$
 		}
+		return "";
 	}
 
 	@Override
 	public String toString() {
-		return "Freemarker Language Server" + super.toString();
+		return "FreeMarker Language Server" + super.toString();
 	}
+
 }
