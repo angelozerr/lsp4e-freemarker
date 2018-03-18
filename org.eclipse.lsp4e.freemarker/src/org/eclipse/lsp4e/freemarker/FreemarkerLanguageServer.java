@@ -19,6 +19,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.lsp4e.server.ProcessStreamConnectionProvider;
 import org.osgi.framework.Bundle;
 
+/**
+ * LSP4e Freemarker Language server.
+ *
+ */
 public class FreemarkerLanguageServer extends ProcessStreamConnectionProvider {
 
 	public FreemarkerLanguageServer() {
@@ -35,13 +39,12 @@ public class FreemarkerLanguageServer extends ProcessStreamConnectionProvider {
 			workingDir = new Path(FileLocator.toFileURL(FileLocator.find(bundle, new Path("server"), null)).getPath());
 			setWorkingDirectory(workingDir.toOSString());
 		} catch (IOException e) {
-			// LanguageServerPlugin.logError(e);
-			e.printStackTrace();
+			FreemarkerPlugin.log(e);
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "Java Language Server" + super.toString();
+		return "Freemarker Language Server" + super.toString();
 	}
 }
