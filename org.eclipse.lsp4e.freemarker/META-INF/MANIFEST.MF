@@ -17,3 +17,4 @@ Require-Bundle: org.eclipse.lsp4e,
  org.eclipse.ui.genericeditor
 Bundle-Activator: org.eclipse.lsp4e.freemarker.FreemarkerPlugin
 Bundle-ActivationPolicy: lazy
+Eclipse-BundleShape: dir
