@@ -1,20 +1,26 @@
 [![Build Status](https://secure.travis-ci.org/angelozerr/lsp4e-freemarker.png)](http://travis-ci.org/angelozerr/lsp4e-freemarker)
 
-Eclipse Freemarker LSP
+Eclipse FreeMarker LSP
 ===========================
 
-The `LSP4e Freemarker` is a an Eclipse plugin for [Freemarker](https://freemarker.apache.org/) based on:
+The `LSP4e FreeMarker` is a an Eclipse plugin for [FreeMarker](https://freemarker.apache.org/) based on:
 
-* [Eclipse LSP4E](https://projects.eclipse.org/projects/technology.lsp4e) to consume the [Freemarker Language Server](https://github.com/angelozerr/freemarker-languageserver) inside Eclipse.
-* [Eclipse TM4E](https://projects.eclipse.org/projects/technology.tm4e) to support Freemarker syntax coloration based on TextMate grammar. 
+* [Eclipse LSP4E](https://projects.eclipse.org/projects/technology.lsp4e) to consume the [FreeMarker Language Server](https://github.com/angelozerr/freemarker-languageserver) inside Eclipse.
+* [Eclipse TM4E](https://projects.eclipse.org/projects/technology.tm4e) to support FreeMarker syntax coloration based on TextMate grammar. 
 * [FreeMarker Language Server](https://github.com/angelozerr/freemarker-languageserver) the FreeMarker Language Server.
 
+Features
+===========================
+
+* Syntax coloration for HTML & FreeMarker syntax both
+* FreeMarker Validation (as you type) 
+ 
 Demo
 ===========================
 
 Here a demo (with installed[Eclipse BlueSky](https://github.com/mickaelistria/eclipse-bluesky)):
  
- ![Editor Config](screenshots/FreemarkerLSPDemo.gif)
+ ![Editor Config](screenshots/FreeMarkerLSPDemo.gif)
  
 Installation
 ===========================
