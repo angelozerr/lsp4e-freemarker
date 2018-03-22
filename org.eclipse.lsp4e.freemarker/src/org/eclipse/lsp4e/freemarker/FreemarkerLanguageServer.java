@@ -25,6 +25,9 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jdt.internal.launching.StandardVMType;
+import org.eclipse.jdt.launching.IVMInstall;
+import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.lsp4e.server.ProcessStreamConnectionProvider;
 import org.osgi.framework.Bundle;
 
@@ -44,7 +47,16 @@ public class FreemarkerLanguageServer extends ProcessStreamConnectionProvider {
 
 	private static List<String> computeCommands() {
 		List<String> commands = new ArrayList<>();
-		commands.add("java");
+		// Try to use the configured Install JRE.
+		IVMInstall install = JavaRuntime.getDefaultVMInstall();
+		if (install != null) {
+			File vmInstallLocation = install.getInstallLocation();
+			File javaExecutableLocation = StandardVMType.findJavaExecutable(vmInstallLocation);
+			// ex: C:\Program Files\Java\jre1.8.0_77\bin\javaw.exe
+			commands.add(javaExecutableLocation.getAbsolutePath());
+		} else {
+			commands.add("java");
+		}
 		commands.add("-jar");
 		commands.add(computeFreemarkerLanguageServerJarPath());
 		return commands;
