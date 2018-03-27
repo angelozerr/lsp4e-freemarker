@@ -7,4 +7,37 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<packaging>eclipse-target-definition</packaging>
+	
+	<build>
+		<plugins>
+			<plugin>
+			    <!--
+			        This is only needed for developing this project in the Eclipse IDE, as unlike the real Maven
+			        build (the org.eclipse.tycho:target-platform-configuration plugin), the Eclipse IDE (PDE) won't
+			        resolve OSGi bundles coming from a non-p2 (m2) repository.
+			        
+			        This plugin is ran automatically by m2e, but you still need to select the generated file
+			        (target/target-platform-pde.target) manually as the target platform here:
+			        Window -> Preferences -> Plug-in Development -> Target platform
+			        
+			        See: https://github.com/andriusvelykis/pde-target-maven-plugin
+		        -->
+				<groupId>lt.velykis.maven</groupId>
+				<artifactId>pde-target-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<id>pde-target</id>
+						<goals>
+							<goal>add-pom-dependencies</goal>
+						</goals>
+						<configuration>
+							<baseDefinition>${project.basedir}/target-platform.target</baseDefinition>
+							<outputFile>${project.build.directory}/target-platform-pde.target</outputFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>			
 </project>

@@ -69,6 +69,9 @@
    <bundle id="org.eclipse.xtext.xbase.lib" version="0.0.0">
       <category name="Dependencies"/>
    </bundle>
+   <bundle id="org.freemarker.languageserver-bundle" version="0.0.0">
+      <category name="Dependencies"/>
+   </bundle>
    <category-def name="Freemarker LSP4E" label="Freemarker in Eclipse IDE"/>
    <category-def name="Dependencies" label="Dependencies"/>
    <repository-reference location="http://download.eclipse.org/lsp4e/snapshots" enabled="true" />

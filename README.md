@@ -53,3 +53,9 @@ Development in Eclipse
    (TODO: Find a better solution.)
   
 2. Now you can import the projects as Maven project.
+
+3. Wait until Eclipse finishes (there will be some errors). Now there should be a
+   `target-platform/target/target-platform-pde.target file.` Select that as the target
+   platform Under "Window" -> "Preferences" -> "Plug-in Development" -> "Target platform". (This file has
+   to be re-generated when new dependencies are added to the project. This file is only needed for development
+   in Eclipse, and is not used by the Maven build.)

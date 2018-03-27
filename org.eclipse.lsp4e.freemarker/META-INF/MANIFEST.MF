@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.lsp4e,
  org.eclipse.ui.workbench.texteditor,
  org.eclipse.ui.editors,
  org.eclipse.ui.genericeditor,
- org.eclipse.jdt.launching
+ org.freemarker.languageserver-bundle
 Bundle-Activator: org.eclipse.lsp4e.freemarker.FreemarkerPlugin
 Bundle-ActivationPolicy: lazy
 Eclipse-BundleShape: dir

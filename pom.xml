@@ -144,6 +144,16 @@
 		</plugins>
 	</build>
 
+	<!-- Maven (m2) dependencies; only the jar-s that are OSGi bundles will count! -->
+	<!-- Also note that this only works because of the <pomDependencies>consider</pomDependencies> earlier. -->
+	<dependencies>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker-languageserver-bundle</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>cbi</id>
