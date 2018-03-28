@@ -26,9 +26,10 @@ public abstract class LocalStreamConnectionProvider implements StreamConnectionP
 	
 	private static final int PIPE_BUFFER_SIZE = 8192;
 	
-	private final PipedOutputStream clientToServerStream = new PipedOutputStream();
-	private final PipedInputStream serverToClientStream = new PipedInputStream(PIPE_BUFFER_SIZE);
-	
+	private PipedOutputStream clientToServerStream;
+	private PipedInputStream serverToClientStream;
+	private PipedInputStream clientToServerStreamReverse;
+	private PipedOutputStream serverToClientStreamReverse;
 	private Future<?> launched; 
 	
 	public LocalStreamConnectionProvider() {
@@ -36,7 +37,11 @@ public abstract class LocalStreamConnectionProvider implements StreamConnectionP
 
 	@Override
 	public synchronized void start() throws IOException {
-		launched = launch(new PipedInputStream(clientToServerStream, PIPE_BUFFER_SIZE), new PipedOutputStream(serverToClientStream));
+		clientToServerStream = new PipedOutputStream();
+		serverToClientStream = new PipedInputStream(PIPE_BUFFER_SIZE);
+		clientToServerStreamReverse = new PipedInputStream(clientToServerStream, PIPE_BUFFER_SIZE);
+		serverToClientStreamReverse = new PipedOutputStream(serverToClientStream);
+		launched = launch(clientToServerStreamReverse, serverToClientStreamReverse);
 	}
 
 	protected abstract Future<?> launch(InputStream clientToServerStream, OutputStream serverToClientStream) throws IOException;
@@ -58,8 +63,45 @@ public abstract class LocalStreamConnectionProvider implements StreamConnectionP
 
 	@Override
 	public synchronized void stop() {
+		if (launched == null) {
+			return;
+		}
+		
 		// TODO Not sure if it works like this...
 		launched.cancel(true);
+		launched = null;
+		
+		try {
+			clientToServerStream.close();
+		} catch (IOException e) {
+			// TODO Log
+			e.printStackTrace();
+		}
+		clientToServerStream = null;
+
+		try {
+			clientToServerStreamReverse.close();
+		} catch (IOException e) {
+			// TODO Log
+			e.printStackTrace();
+		}
+		clientToServerStreamReverse = null;
+		
+		try {
+			serverToClientStreamReverse.close();
+		} catch (IOException e) {
+			// TODO Log
+			e.printStackTrace();
+		}
+		serverToClientStreamReverse = null;
+		
+		try {
+			serverToClientStream.close();
+		} catch (IOException e) {
+			// TODO Log
+			e.printStackTrace();
+		}
+		serverToClientStream = null;
 	}
 
 }
