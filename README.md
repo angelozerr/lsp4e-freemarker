@@ -41,3 +41,21 @@ Once https://github.com/mickaelistria/eclipse-bluesky/issues/63 will work in Pho
 
 HTML syntax coloration (managed with TextMate) and HTML completion, mark occurrences, etc is not a part of this plugin. I suggest you that you install https://github.com/mickaelistria/eclipse-bluesky
 which provides those features.
+
+Development in Eclipse
+======================
+
+1. Use "Eclipse for Committers" (Photon M6 as of this writing).
+
+2. Under "Help" -> "Install New Software..." -> "Add" -> "Archive", and point to 
+   `lsp4e-freemarker/repository/target/repository-X.X.X-SNAPSHOT.zip`.
+   Here install only the Dependencies, with the exception of those containing "freemarker" in their names.
+   (TODO: Find a better solution.)
+  
+2. Now you can import the projects as Maven project.
+
+3. Wait until Eclipse finishes (there will be some errors). Now there should be a
+   `target-platform/target/target-platform-pde.target file.` Select that as the target
+   platform Under "Window" -> "Preferences" -> "Plug-in Development" -> "Target platform". (This file has
+   to be re-generated when new dependencies are added to the project. This file is only needed for development
+   in Eclipse, and is not used by the Maven build.)

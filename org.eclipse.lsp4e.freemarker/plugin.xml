@@ -34,7 +34,7 @@
    <extension
          point="org.eclipse.lsp4e.languageServer">
       <server
-            class="org.eclipse.lsp4e.freemarker.FreemarkerLanguageServer"
+            class="org.eclipse.lsp4e.freemarker.FreemarkerLanguageServerStreamConnectionProvider"
             id="org.eclipse.lsp4e.freemarker"
             label="Freemarker Language Server" >
       </server>
