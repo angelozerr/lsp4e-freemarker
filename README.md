@@ -47,9 +47,8 @@ Development in Eclipse
 
 1. Use "Eclipse for Committers" (Photon M6 as of this writing).
 
-2. Under "Help" -> "Install New Software..." -> "Add" -> "Archive", and point to 
-   `lsp4e-freemarker/repository/target/repository-X.X.X-SNAPSHOT.zip`.
-   Here install only the Dependencies, with the exception of those containing "freemarker" in their names.
-   (TODO: Find a better solution.)
-  
-2. Now you can import the projects as Maven project.
+2. In Eclipse, "File" / "Import..." / "Existing Maven Projects". Point at the `lsp4e-freemarker` project root directory, add all the Maven projects it finds.
+
+3. Now go to "Window" / "Preferences" / "Plug-in Development" / "Target Platform", and Select "lsp4-freemarker" (this only appears if you have imported the "target-platform" Maven project earlier)
+
+TODO: Even after doing point 3., Eclipse can't resolve the "org.eclipse.jdt.launching" bundle.
