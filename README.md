@@ -49,6 +49,9 @@ Development in Eclipse
 
 2. In Eclipse, "File" / "Import..." / "Existing Maven Projects". Point at the `lsp4e-freemarker` project root directory, add all the Maven projects it finds.
 
-3. Now go to "Window" / "Preferences" / "Plug-in Development" / "Target Platform", and Select "lsp4-freemarker" (this only appears if you have imported the "target-platform" Maven project earlier)
+3. Now go to "Window" / "Preferences" / "Plug-in Development" / "Target Platform", and Select "lsp4-freemarker" (this only appears if you have imported the "target-platform" Maven project earlier).
+   After this, there shouldn't be more errors in the project (no dependency classes that aren't found).
 
-TODO: Even after doing point 3., Eclipse can't resolve the "org.eclipse.jdt.launching" bundle.
+4. To try the plugin, right click on the `org.eclipse.lsp4j.freemarker` project, then "Run as" / "Eclipse Application".
+   (TODO: Currently that will fail with `Application "org.eclipse.ui.ide.workbench" could not be found in the registry`. I have worked that around by adding 
+   `<location path="${eclipse_home}" type="Directory"/>` to the target platform, but of course there must be a better way.)
