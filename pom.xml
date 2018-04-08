@@ -11,6 +11,10 @@
 		<url>https://github.com/angelozerr/lsp4e-freemarker</url>
 	</organization>
 	<inceptionYear>2018</inceptionYear>
+	
+	<properties>
+		<tycho.version>1.1.0</tycho.version>
+	</properties>
 
 	<licenses>
 		<license>
@@ -53,13 +57,13 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
-				<version>1.0.0</version>
+				<version>${tycho.version}</version>
 				<extensions>true</extensions>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
-				<version>1.0.0</version>
+				<version>${tycho.version}</version>
 				<inherited>true</inherited>
 				<configuration>
 					<resolver>p2</resolver>
@@ -77,7 +81,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
-				<version>1.0.0</version>
+				<version>${tycho.version}</version>
 				<executions>
 					<execution>
 						<id>plugin-source</id>
@@ -88,13 +92,13 @@
 				</executions>
 			</plugin>
 			<!-- <plugin> <groupId>org.eclipse.tycho.extras</groupId> <artifactId>tycho-source-feature-plugin</artifactId> 
-				<version>1.0.0</version> <executions> <execution> <id>source-feature</id> 
+				<version>${tycho.version}</version> <executions> <execution> <id>source-feature</id> 
 				<phase>package</phase> <goals> <goal>source-feature</goal> </goals> </execution> 
 				</executions> </plugin> -->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-plugin</artifactId>
-				<version>1.0.0</version>
+				<version>${tycho.version}</version>
 				<executions>
 					<execution>
 						<id>attach-p2-metadata</id>
