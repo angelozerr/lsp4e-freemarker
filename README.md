@@ -49,7 +49,7 @@ Development in Eclipse
 
 2. In Eclipse, "File" / "Import..." / "Existing Maven Projects". Point at the `lsp4e-freemarker` project root directory, add all the Maven projects it finds.
 
-3. Now go to "Window" / "Preferences" / "Plug-in Development" / "Target Platform", and Select "lsp4-freemarker" (this only appears if you have imported the "target-platform" Maven project earlier).
+3. Now go to "Window" / "Preferences" / "Plug-in Development" / "Target Platform", and Select "lsp4e-freemarker" (this only appears if you have imported the "target-platform" Maven project earlier).
    After this, there shouldn't be more errors in the project (no dependency classes that aren't found).
 
 4. To try the plugin, right click on the `org.eclipse.lsp4j.freemarker` project, then "Run as" / "Eclipse Application".
